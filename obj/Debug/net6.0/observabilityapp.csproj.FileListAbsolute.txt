@@ -30,3 +30,5 @@
 /Users/josephassiga/Desktop/projects/EI/observabilityapp/obj/Debug/net6.0/observabilityapp.RazorAssemblyInfo.cs
 /Users/josephassiga/Desktop/projects/EI/observabilityapp/obj/Debug/net6.0/scopedcss/Pages/Shared/_Layout.cshtml.rz.scp.css
 /Users/josephassiga/Desktop/projects/EI/observabilityapp/obj/Debug/net6.0/scopedcss/projectbundle/observabilityapp.bundle.scp.css
+/Users/josephassiga/Desktop/projects/EI/observabilityapp/bin/Debug/net6.0/Prometheus.NetStandard.dll
+/Users/josephassiga/Desktop/projects/EI/observabilityapp/bin/Debug/net6.0/Prometheus.AspNetCore.dll
