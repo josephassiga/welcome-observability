@@ -14,7 +14,7 @@ public class WelcomeObservabilityController : ControllerBase
 
     public WelcomeObservabilityController()
     {
-        IterationCount = Metrics.CreateCounter("ei_totals_call", "Number of iterations that the sample service has ever executed.");
+        IterationCount = Metrics.CreateCounter("ei_welcome_totals_calls", "Number of call to the Welcome method .");
     }
     [HttpGet(Name = "welcome")]
     public String Get()
