@@ -9,6 +9,7 @@
       "observabilityapp/1.0.0": {
         "dependencies": {
           "Swashbuckle.AspNetCore": "6.2.3",
+          "prometheus-net": "7.0.0",
           "prometheus-net.AspNetCore": "7.0.0"
         },
         "runtime": {

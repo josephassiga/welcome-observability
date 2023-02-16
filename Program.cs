@@ -27,9 +27,6 @@ else
      app.UseExceptionHandler("/Error");
 }
 
-// Capture metrics about all received HTTP requests.
-app.UseHttpMetrics();
-
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -39,6 +36,9 @@ app.MapRazorPages();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Capture metrics about all received HTTP requests.
+app.UseHttpMetrics();
 
 app.UseEndpoints(endpoints =>
 {
