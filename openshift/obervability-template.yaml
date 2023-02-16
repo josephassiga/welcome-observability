@@ -10,30 +10,28 @@ metadata:
 
       WARNING: Cette application n'est que utilisées à titre d'exemple, pour toutes création de métriques complexes, voire le package prometheus-net
     iconClass: icon-dotnet
-    openshift.io/display-name: CakePHP + MySQL (Ephemeral)
-    openshift.io/provider-display-name: Red Hat, Inc.
-    openshift.io/support-url: https://access.redhat.com
-    samples.operator.openshift.io/version: 4.10.36
     tags: .NETCOre,.NET,C#,Csharp
   name: observability-custom-metrics
   namespace: openshift
 objects:
+
+# SERVICE.
   - apiVersion: v1
     kind: Service
     metadata:
       annotations:
-        app.openshift.io/vcs-uri: https://github.com/josephassiga/welcome-observability.git
+        app.openshift.io/vcs-uri: ${APP_REPO}
         openshift.io/generated-by: OpenShiftWebConsole
       labels:
-        app: observability
-        app.kubernetes.io/component: observability
-        app.kubernetes.io/instance: observability
-        app.kubernetes.io/name: observability
-        app.kubernetes.io/part-of: observability
+        app: ${APPLICATION_NAME}
+        app.kubernetes.io/component: ${APPLICATION_NAME}
+        app.kubernetes.io/instance: ${APPLICATION_NAME}
+        app.kubernetes.io/name: ${APPLICATION_NAME}
+        app.kubernetes.io/part-of: ${APPLICATION_NAME}
         app.openshift.io/runtime: dotnet
         app.openshift.io/runtime-version: 6.0-ubi8
-      name: observability
-      namespace: metrics-demo
+      name: ${APPLICATION_NAME}
+      namespace: ${PROJECT_NAME}
     spec:
       ports:
       - name: 8080-tcp
@@ -41,33 +39,35 @@ objects:
         protocol: TCP
         targetPort: 8080
       selector:
-        app: observability
-        deploymentconfig: observability
+        app: ${APPLICATION_NAME}
+        deploymentconfig: ${APPLICATION_NAME}
       sessionAffinity: None
       type: ClusterIP
+
+# DEPLOYMENT.
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
       annotations:
         alpha.image.policy.openshift.io/resolve-names: '*'
         app.openshift.io/route-disabled: "false"
-        app.openshift.io/vcs-uri: https://github.com/josephassiga/welcome-observability.git
+        app.openshift.io/vcs-uri: ${APP_REPO}
         openshift.io/generated-by: OpenShiftWebConsole
       labels:
-        app: observability
-        app.kubernetes.io/component: observability
-        app.kubernetes.io/instance: observability
-        app.kubernetes.io/name: observability
-        app.kubernetes.io/part-of: observability
+        app: ${APPLICATION_NAME}
+        app.kubernetes.io/component: ${APPLICATION_NAME}
+        app.kubernetes.io/instance: ${APPLICATION_NAME}
+        app.kubernetes.io/name: ${APPLICATION_NAME}
+        app.kubernetes.io/part-of: ${APPLICATION_NAME}
         app.openshift.io/runtime: dotnet
         app.openshift.io/runtime-version: 6.0-ubi8
-      name: observability
-      namespace: metrics-demo
+      name: ${APPLICATION_NAME}
+      namespace: ${PROJECT_NAME}
     spec:
       replicas: 1
       selector:
         matchLabels:
-          app: observability
+          app: ${APPLICATION_NAME}
       strategy:
         rollingUpdate:
           maxSurge: 25%
@@ -76,21 +76,23 @@ objects:
       template:
         metadata:
           labels:
-            app: observability
-            deploymentconfig: observability
+            app: ${APPLICATION_NAME}
+            deploymentconfig: ${APPLICATION_NAME}
         spec:
           containers:
-          - image: image-registry.openshift-image-registry.svc:5000/metrics-demo/observability@sha256:26ff8be7c6ad1c3634b7a0c8c65b4610f2f187265eaf161ad40fc28109f78c38
+          - image: ${OCP_REGISTRY}/${PROJECT_NAME}/${APPLICATION_NAME}:${ENV_TAG}
             imagePullPolicy: Always
-            name: observability
+            name: ${APPLICATION_NAME}
             ports:
             - containerPort: 8080
               protocol: TCP
+
+# BUILDCONFIG.
   - apiVersion: build.openshift.io/v1
     kind: BuildConfig
     metadata:
       annotations:
-        app.openshift.io/vcs-uri: https://github.com/josephassiga/welcome-observability.git
+        app.openshift.io/vcs-uri: ${APP_REPO}
         openshift.io/generated-by: OpenShiftWebConsole
       labels:
         app: observability
@@ -100,18 +102,18 @@ objects:
         app.kubernetes.io/part-of: observability
         app.openshift.io/runtime: dotnet
         app.openshift.io/runtime-version: 6.0-ubi8
-      name: observability
-      namespace: metrics-demo
+      name: ${PROJECT_NAME}
+      namespace: ${PROJECT_NAME}
     spec:
       output:
         to:
           kind: ImageStreamTag
-          name: observability:latest
+          name: ${PROJECT_NAME}:${ENV_TAG}
       runPolicy: Serial
       source:
         contextDir: /
         git:
-          uri: https://github.com/josephassiga/welcome-observability.git
+          uri: ${APP_REPO}
         type: Git
       strategy:
         sourceStrategy:
@@ -124,11 +126,13 @@ objects:
       - imageChange: {}
         type: ImageChange
       - type: ConfigChange
+
+# IMAGESTREAM.
   - apiVersion: image.openshift.io/v1
     kind: ImageStream
     metadata:
       annotations:
-        app.openshift.io/vcs-uri: https://github.com/josephassiga/welcome-observability.git
+        app.openshift.io/vcs-uri: ${APP_REPO}
         openshift.io/generated-by: OpenShiftWebConsole
       labels:
         app: observability
@@ -139,25 +143,27 @@ objects:
         app.openshift.io/runtime: dotnet
         app.openshift.io/runtime-version: 6.0-ubi8
       name: observability
-      namespace: metrics-demo
+      namespace: ${PROJECT_NAME}
     spec:
       lookupPolicy:
         local: false
+
+# ROUTE.
   - apiVersion: route.openshift.io/v1
     kind: Route
     metadata:
       annotations:
         openshift.io/host.generated: "true"
       labels:
-        app: observability
-        app.kubernetes.io/component: observability
-        app.kubernetes.io/instance: observability
-        app.kubernetes.io/name: observability
-        app.kubernetes.io/part-of: observability
+        app: ${APPLICATION_NAME}
+        app.kubernetes.io/component: ${APPLICATION_NAME}
+        app.kubernetes.io/instance: ${APPLICATION_NAME}
+        app.kubernetes.io/name: ${APPLICATION_NAME}
+        app.kubernetes.io/part-of: ${APPLICATION_NAME}
         app.openshift.io/runtime: dotnet
         app.openshift.io/runtime-version: 6.0-ubi8
-      name: observability
-      namespace: metrics-demo
+      name: ${APPLICATION_NAME}
+      namespace: ${PROJECT_NAME}
     spec:
       port:
         targetPort: 8080-tcp
@@ -166,6 +172,24 @@ objects:
         termination: edge
       to:
         kind: Service
-        name: observability
+        name: ${APPLICATION_NAME}
         weight: 100
 
+
+# PARAMETERS
+parameters:
+  - description: Project Name.
+    name: PROJECT_NAME
+    required: true
+  - description: Application Name.
+    name: APPLICATION_NAME
+    value: 'ei-observability'
+  - description: OCP Registry
+    name: OCP_REGISTRY
+    value: image-registry.openshift-image-registry.svc:5000
+  - description: Image Tag of the envinronment
+    name: ENV_TAG
+    value: 'v1'
+  - description: Application Repository
+    name: APP_REPO
+    value: 'https://github.com/josephassiga/welcome-observability.git'
