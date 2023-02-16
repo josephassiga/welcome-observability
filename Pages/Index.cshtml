@@ -4,7 +4,24 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
+<div >
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <br />
+    <h4> We are using .NET library to instrument your code with prometheus metrics, here is the <a
+            href="https://github.com/prometheus-net/prometheus-net" target="_blank">documentation</a></h4>
+    <br />
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core" target="_blank">building Web apps with ASP.NET Core.</a></p>
+    <br />
+</div>
+<div>
+    <p>The Prometheus client libraries offer four core metric types : <b>Counter, Gauge, Histogram, and Summary.</b></p>
+    <p>We are exposing the api <a href="/welcome" target="_blank"><b>/welcome</b></a> with two customs metris : 
+      <ul>
+        <li><b>ei_http_welcome_requets_received_total</b> : Get the totals number of request received by the API Welcome.</li>
+        <li><b>ei_http_welcome_duration_seconds</b> : Get the duration of request received by the API Welcome.</li>
+      </ul>
+    </p>
+</div>
+<div>
+    <p>You can have access to metrics page here : <a href="/metrics" target="_blank"><b>/metrics</b>.</a></p>
 </div>
