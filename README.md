@@ -11,7 +11,7 @@ Ce projet à pour but de montrer la mise place des métriques personnalisées da
  - Package Prometheus-net : 7.0
 ```
 
-Si vous voulez avoir plus d'information sur le Package ***prometheus-net*** : https://github.com/prometheus-net/prometheus-net .
+> **_NOTE:_** Si vous voulez avoir plus d'information sur le Package ***prometheus-net*** : https://github.com/prometheus-net/prometheus-net .
 
 ## Execution de l'application
 
@@ -35,16 +35,14 @@ info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Development
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
-
 ## Tester l'application :
 
-### Page d'acceuil :
+### 1. Page d'acceuil :
 ```
 $> curl localhost:8080
 ```
 
-### API welcome :
+### 2. API welcome :
 ```
 $> curl localhost:8080/welcome
 
@@ -52,7 +50,7 @@ Welcome to EI Custom Metrics
 ```
 
 
-### Page swagger UI:
+### 3. Page swagger UI:
 ```
 $> curl http://localhost:8080/swagger/index.html
 ```
