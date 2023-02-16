@@ -39,6 +39,25 @@ info: Microsoft.Hosting.Lifetime[0]
 
 ## Tester l'application :
 
+### Page d'acceuil :
+```
+$> curl localhost:8080
+```
+
+### API welcome :
+```
+$> curl localhost:8080/welcome
+
+Welcome to EI Custom Metrics
+```
+
+
+### Page swagger UI:
+```
+$> curl http://localhost:8080/swagger/index.html
+```
+
+
 
 
 
