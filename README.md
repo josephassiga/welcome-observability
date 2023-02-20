@@ -46,7 +46,7 @@ $> curl localhost:8080
 ```
 $> curl localhost:8080/welcome
 
-Welcome to EI Custom Metrics
+Welcome For Custom Metrics Demo
 ```
 
 
