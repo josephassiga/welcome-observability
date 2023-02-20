@@ -20,11 +20,11 @@ public class ObservabilityController : ControllerBase
 
     public ObservabilityController()
     {
-        IterationCount = Metrics.CreateCounter("ei_http_welcome_requets_received_total", "Total number of requests serviced by Welcome API.", new CounterConfiguration
+        IterationCount = Metrics.CreateCounter("http_welcome_requets_received_total", "Total number of requests serviced by Welcome API.", new CounterConfiguration
         {
             LabelNames = new[] { "path", "method", "status" }
         });
-        WelcomeDuration = Metrics.CreateHistogram("ei_http_welcome_duration_seconds", "The duration in seconds between the response to a request.", new HistogramConfiguration
+        WelcomeDuration = Metrics.CreateHistogram("http_welcome_duration_seconds", "The duration in seconds between the response to a request.", new HistogramConfiguration
         {
             // We divide measurements in 10 buckets of $100 each, up to $1000.
             //Buckets = Histogram.LinearBuckets(start: 100, width: 100, count: 10)
@@ -51,7 +51,7 @@ public class ObservabilityController : ControllerBase
         //RegisterResponseTime(200, "GET", Stopwatch.StartNew().Elapsed);
         WelcomeDuration.Labels(statusCode.ToString(), method, path).Observe(Stopwatch.StartNew().Elapsed.TotalSeconds);
 
-        return "Welcome to EI Custom Metrics";
+        return "Welcome For Custom Metrics Demo";
     }
 
 }
