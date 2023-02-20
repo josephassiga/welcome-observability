@@ -24,7 +24,7 @@ public class ObservabilityController : ControllerBase
         {
             LabelNames = new[] { "path", "method", "status" }
         });
-        WelcomeDuration = Metrics.CreateHistogram("http_welcome_duration_seconds", "The duration in seconds between the response to a request.", new HistogramConfiguration
+        WelcomeDuration = Metrics.CreateHistogram("http_welcome_duration_seconds", "The duration in seconds of the response to a request.", new HistogramConfiguration
         {
             // We divide measurements in 10 buckets of $100 each, up to $1000.
             //Buckets = Histogram.LinearBuckets(start: 100, width: 100, count: 10)
