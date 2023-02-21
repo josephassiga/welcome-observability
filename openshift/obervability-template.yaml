@@ -2,7 +2,7 @@ apiVersion: template.openshift.io/v1
 kind: Template
 labels:
   app: observability-custom-metrics
-  template: ei-custom-metrics
+  template: custom-metrics
 metadata:
   annotations:
     description: |-
@@ -183,7 +183,7 @@ parameters:
     required: true
   - description: Application Name.
     name: APPLICATION_NAME
-    value: 'ei-observability'
+    value: 'observability'
   - description: OCP Registry
     name: OCP_REGISTRY
     value: image-registry.openshift-image-registry.svc:5000

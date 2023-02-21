@@ -24,7 +24,7 @@ $> dotnet watch
 dotnet watch 🔧 Building...
   Determining projects to restore...
   All projects are up-to-date for restore.
-  observabilityapp -> /Users/josephassiga/Desktop/projects/EI/observabilityapp/bin/Debug/net6.0/observabilityapp.dll
+  observabilityapp -> /Users/josephassiga/Desktop/projects/.../observabilityapp/bin/Debug/net6.0/observabilityapp.dll
 The application is trying to access the ASP.NET Core developer certificate key. A prompt might appear to ask for permission to access the key. When that happens, select 'Always Allow' to grant 'dotnet' access to the certificate key in the future.
 dotnet watch 🚀 Started
 info: Microsoft.Hosting.Lifetime[14]
